@@ -20,7 +20,7 @@ jobs:
             node-version: 24
 
       - name: Gerar Artefato
-        runs: zip -r app.zip
+        run: zip -r app.zip
 
       - name: Publicar Artefato
         uses: actions/upload-artifact@v4
