@@ -1,29 +1,22 @@
 name: App Simples
 
-on: 
-  push:
-    branches: [ main ]
+deploys:
+  needs: build
+  runs-on: ubuntu-latest
 
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4
-      - name: Instalar Node
-        uses: actions/setup-node@v4
-        with:
-            node-version: 24
-
-      - name: Gerar Artefato
-        run: zip -r app.zip .
-
-      - name: Publicar Artefato
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-build
-          path: app.zip
+  steps:
+    - name: deploy via ssh (appleboy)
+      uses: appleboy/ssh-action@master
+      with: 
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        scripts: |
+          cd ~
+          if [ ! -d "danilo.app" ]; then
+            git clone https://github.com/${{ github.repository }} danilo-app
+            fi
+            cd danilo-app
+            git pull origin main
+            docker compose pull
+            docker compose up -d

@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:15-alpine
+    container_name: danilo_db
     environment:
       POSTGRES_USER: fatec_user
       POSTGRES_PASSWORD: fatec_password
@@ -10,18 +11,23 @@ services:
 
   api:
     build: ./backend
+      - danilo_data:/var/lib/postgresql/data
+
+  api:
+    build: ./backend
+    container_name: danilo_api
     restart: always  # <-- Se a API cair, o Docker sobe ela de novo até o banco estar pronto.
     environment:
       DB_HOST: db
     depends_on:
       - db
     ports:
-      - "3000:3000"
+      - "3013:3000"
 
   web:
     build: ./frontend
     ports:
-      - "80:80"
+      - "8013:80"
     depends_on:
       - api
 
