@@ -16,7 +16,7 @@ services:
   api:
     build: ./backend
     container_name: danilo_api
-    restart: always  # <-- Se a API cair, o Docker sobe ela de novo até o banco estar pronto.
+    restart: always
     environment:
       DB_HOST: db
     depends_on:
@@ -26,6 +26,7 @@ services:
 
   web:
     build: ./frontend
+    container_name: danilo_web
     ports:
       - "8013:80"
     depends_on:
