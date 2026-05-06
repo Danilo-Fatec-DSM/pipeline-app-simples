@@ -32,4 +32,4 @@ services:
       - api
 
 volumes:
-  postgres_data:
+  danilo_data:
