@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: fatec_password
       POSTGRES_DB: todolist
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - danilo_data:/var/lib/postgresql/data
 
   api:
     build: ./backend
