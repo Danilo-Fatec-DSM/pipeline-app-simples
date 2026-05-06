@@ -20,7 +20,7 @@
 
         async function addTask() {
             const input = document.getElementById('taskInput');
-            await fetch('http://localhost:3015/tarefas', {
+            await fetch('http://localhost:3013/tarefas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ titulo: input.value })
