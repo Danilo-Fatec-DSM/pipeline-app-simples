@@ -1,20 +1,5 @@
 name: App Simples
 
-deploys:
-  needs: build
-  runs-on: ubuntu-latest
-
-  steps:
-    - name: deploy via ssh (appleboy)
-      uses: appleboy/ssh-action@master
-      with: 
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        scripts: |
-          cd ~
-          if [ ! -d "danilo.app" ]; then
-            git clone https://github.com/${{ github.repository }} danilo-app
 on:
   push:
     branches: [ main ]
