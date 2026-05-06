@@ -11,10 +11,6 @@ services:
 
   api:
     build: ./backend
-      - danilo_data:/var/lib/postgresql/data
-
-  api:
-    build: ./backend
     container_name: danilo_api
     restart: always
     environment:
